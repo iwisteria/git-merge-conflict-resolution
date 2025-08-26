@@ -186,6 +186,47 @@ example.txt | 2 +-<br>
             <div class="command">git commit -m "Merge remote changes"</div>
         </div>
 
+        <h2>🤖 Claude Codeを使用した解決方法</h2>
+        <p><strong>Claude Code</strong>はAnthropic社が提供するAIアシスタントで、コマンドラインから直接利用できます。</p>
+        
+        <div class="step">
+            <span class="step-number">1</span>
+            <strong>Claude Codeを起動</strong>
+            <div class="command">claude</div>
+            <p>プロジェクトディレクトリで上記コマンドを実行</p>
+        </div>
+
+        <div class="step">
+            <span class="step-number">2</span>
+            <strong>問題を説明</strong>
+            <p>Claude Codeに以下のように問い合わせ：</p>
+            <div class="command" style="background-color: #f0f7ff;">
+"git pullでdivergent branchesエラーが出ています。マージ方式で解決してください"
+            </div>
+        </div>
+
+        <div class="step">
+            <span class="step-number">3</span>
+            <strong>自動解決</strong>
+            <p>Claude Codeが以下を自動実行：</p>
+            <ul>
+                <li>現在の状況を分析（git status確認）</li>
+                <li>適切な設定を適用（git config pull.rebase false）</li>
+                <li>マージを実行（git pull origin main）</li>
+                <li>コンフリクトがあれば解決方法を提案</li>
+            </ul>
+        </div>
+
+        <div class="warning">
+            <strong>Claude Codeの利点：</strong>
+            <ul>
+                <li>🎯 <strong>状況に応じた最適な解決策</strong>を提案</li>
+                <li>⚡ <strong>コマンドの自動実行</strong>で時間短縮</li>
+                <li>🛡️ <strong>安全性チェック</strong>付きで実行</li>
+                <li>📚 <strong>学習機能</strong>で同じ問題の再発防止</li>
+            </ul>
+        </div>
+
         <h2>🎯 最終確認</h2>
         <p>マージが完了したかを確認：</p>
         <div class="command">git log --oneline -5</div>
@@ -193,7 +234,8 @@ example.txt | 2 +-<br>
 
         <div class="success" style="text-align: center; margin-top: 30px; padding: 20px; background-color: #d4edda; border-radius: 8px;">
             <h3>🎉 解決完了！</h3>
-            <p>ローカルとリモートの変更が統合され、安全に同期が取れました。</p>
+            <p>ローカルとリモートの変更が統合され、安全に同期が取れました。<br>
+            <small>手動でもClaude Codeでも、お好みの方法で解決できます。</small></p>
         </div>
     </div>
 </body>
