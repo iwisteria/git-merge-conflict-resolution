@@ -30,6 +30,98 @@
             padding-left: 10px;
             border-left: 4px solid #0366d6;
         }
+        .method-section {
+            border: 2px solid #e1e4e8;
+            border-radius: 12px;
+            padding: 25px;
+            margin: 25px 0;
+            position: relative;
+        }
+        .manual-method {
+            border-color: #0366d6;
+            background: linear-gradient(135deg, #f6f8fa 0%, #ffffff 100%);
+        }
+        .ai-method {
+            border-color: #7c3aed;
+            background: linear-gradient(135deg, #faf5ff 0%, #ffffff 100%);
+        }
+        .method-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+            font-size: 24px;
+            font-weight: bold;
+        }
+        .method-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 15px;
+            font-size: 20px;
+        }
+        .manual-icon {
+            background: linear-gradient(135deg, #0366d6, #0550ae);
+            color: white;
+        }
+        .ai-icon {
+            background: linear-gradient(135deg, #7c3aed, #6d28d9);
+            color: white;
+        }
+        .manual-method h2 {
+            color: #0366d6;
+            border-left-color: #0366d6;
+        }
+        .ai-method h2 {
+            color: #7c3aed;
+            border-left-color: #7c3aed;
+        }
+        .manual-method .step {
+            background-color: #f0f7ff;
+            border-left-color: #0366d6;
+        }
+        .ai-method .step {
+            background-color: #faf5ff;
+            border-left-color: #7c3aed;
+        }
+        .manual-method .step-number {
+            background-color: #0366d6;
+        }
+        .ai-method .step-number {
+            background-color: #7c3aed;
+        }
+        .comparison-section {
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            border-radius: 12px;
+            padding: 25px;
+            margin: 30px 0;
+            border: 1px solid #dee2e6;
+        }
+        .vs-divider {
+            text-align: center;
+            margin: 30px 0;
+            position: relative;
+        }
+        .vs-divider::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: linear-gradient(to right, #0366d6, #7c3aed);
+        }
+        .vs-divider span {
+            background: white;
+            padding: 10px 20px;
+            border-radius: 25px;
+            font-weight: bold;
+            font-size: 18px;
+            color: #495057;
+            border: 2px solid #dee2e6;
+        }
         .error-box {
             background-color: #fff5f5;
             border: 1px solid #fed7d7;
@@ -99,6 +191,31 @@
         li {
             margin: 8px 0;
         }
+        @media (max-width: 768px) {
+            .container {
+                padding: 15px;
+            }
+            .method-section {
+                padding: 15px;
+                margin: 15px 0;
+            }
+            .method-header {
+                font-size: 20px;
+            }
+            .method-icon {
+                width: 35px;
+                height: 35px;
+                font-size: 18px;
+            }
+            .comparison-section div[style*="grid-template-columns"] {
+                grid-template-columns: 1fr !important;
+                gap: 15px !important;
+            }
+            .vs-divider span {
+                padding: 8px 15px;
+                font-size: 16px;
+            }
+        }
     </style>
 </head>
 <body>
@@ -118,28 +235,34 @@ hint: You have divergent branches and need to specify how to reconcile them.
         <p><strong>これは何？</strong><br>
         ローカルブランチとリモートブランチが異なる方向に進んでしまい、Gitが自動的に統合できない状態です。</p>
 
-        <h2>🛠️ 解決手順（マージ方式）</h2>
+        <div class="method-section manual-method">
+            <div class="method-header">
+                <div class="method-icon manual-icon">⚙️</div>
+                <span>手動解決（コマンドライン）</span>
+            </div>
+            <h2>🛠️ 解決手順（マージ方式）</h2>
 
-        <div class="step">
-            <span class="step-number">1</span>
-            <strong>VSCodeでターミナルを開く</strong>
-            <ul>
-                <li>VSCodeでプロジェクトを開く</li>
-                <li><strong>ターミナル</strong> → <strong>新しいターミナル</strong>（または <code>⌘ + Shift + `</code>）</li>
-            </ul>
-        </div>
+            <div class="step">
+                <span class="step-number">1</span>
+                <strong>VSCodeでターミナルを開く</strong>
+                <ul>
+                    <li>VSCodeでプロジェクトを開く</li>
+                    <li><strong>ターミナル</strong> → <strong>新しいターミナル</strong>（または <code>⌘ + Shift + `</code>）</li>
+                </ul>
+            </div>
 
-        <div class="step">
-            <span class="step-number">2</span>
-            <strong>マージ設定を行う</strong>
-            <div class="command">git config pull.rebase false</div>
-            <p>この設定により、今後のプルでマージ方式が使用されます。</p>
-        </div>
+            <div class="step">
+                <span class="step-number">2</span>
+                <strong>マージ設定を行う</strong>
+                <div class="command">git config pull.rebase false</div>
+                <p>この設定により、今後のプルでマージ方式が使用されます。</p>
+            </div>
 
-        <div class="step">
-            <span class="step-number">3</span>
-            <strong>プルを実行する</strong>
-            <div class="command">git pull origin main</div>
+            <div class="step">
+                <span class="step-number">3</span>
+                <strong>プルを実行する</strong>
+                <div class="command">git pull origin main</div>
+            </div>
         </div>
 
         <h2>✅ 成功パターン</h2>
@@ -186,45 +309,79 @@ example.txt | 2 +-<br>
             <div class="command">git commit -m "Merge remote changes"</div>
         </div>
 
-        <h2>🤖 Claude Codeを使用した解決方法</h2>
-        <p><strong>Claude Code</strong>はAnthropic社が提供するAIアシスタントで、コマンドラインから直接利用できます。</p>
-        
-        <div class="step">
-            <span class="step-number">1</span>
-            <strong>Claude Codeを起動</strong>
-            <div class="command">claude</div>
-            <p>プロジェクトディレクトリで上記コマンドを実行</p>
+        <div class="vs-divider">
+            <span>VS</span>
         </div>
 
-        <div class="step">
-            <span class="step-number">2</span>
-            <strong>問題を説明</strong>
-            <p>Claude Codeに以下のように問い合わせ：</p>
-            <div class="command" style="background-color: #f0f7ff;">
+        <div class="method-section ai-method">
+            <div class="method-header">
+                <div class="method-icon ai-icon">🤖</div>
+                <span>AI自動解決（Claude Code）</span>
+            </div>
+            <h2>🤖 Claude Codeを使用した解決方法</h2>
+            <p><strong>Claude Code</strong>はAnthropic社が提供するAIアシスタントで、コマンドラインから直接利用できます。</p>
+            
+            <div class="step">
+                <span class="step-number">1</span>
+                <strong>Claude Codeを起動</strong>
+                <div class="command">claude</div>
+                <p>プロジェクトディレクトリで上記コマンドを実行</p>
+            </div>
+
+            <div class="step">
+                <span class="step-number">2</span>
+                <strong>問題を説明</strong>
+                <p>Claude Codeに以下のように問い合わせ：</p>
+                <div class="command" style="background-color: #faf5ff;">
 "git pullでdivergent branchesエラーが出ています。マージ方式で解決してください"
+                </div>
+            </div>
+
+            <div class="step">
+                <span class="step-number">3</span>
+                <strong>自動解決</strong>
+                <p>Claude Codeが以下を自動実行：</p>
+                <ul>
+                    <li>現在の状況を分析（git status確認）</li>
+                    <li>適切な設定を適用（git config pull.rebase false）</li>
+                    <li>マージを実行（git pull origin main）</li>
+                    <li>コンフリクトがあれば解決方法を提案</li>
+                </ul>
+            </div>
+
+            <div class="warning" style="background-color: #faf5ff; border-color: #e9d5ff;">
+                <strong>Claude Codeの利点：</strong>
+                <ul>
+                    <li>🎯 <strong>状況に応じた最適な解決策</strong>を提案</li>
+                    <li>⚡ <strong>コマンドの自動実行</strong>で時間短縮</li>
+                    <li>🛡️ <strong>安全性チェック</strong>付きで実行</li>
+                    <li>📚 <strong>学習機能</strong>で同じ問題の再発防止</li>
+                </ul>
             </div>
         </div>
 
-        <div class="step">
-            <span class="step-number">3</span>
-            <strong>自動解決</strong>
-            <p>Claude Codeが以下を自動実行：</p>
-            <ul>
-                <li>現在の状況を分析（git status確認）</li>
-                <li>適切な設定を適用（git config pull.rebase false）</li>
-                <li>マージを実行（git pull origin main）</li>
-                <li>コンフリクトがあれば解決方法を提案</li>
-            </ul>
-        </div>
-
-        <div class="warning">
-            <strong>Claude Codeの利点：</strong>
-            <ul>
-                <li>🎯 <strong>状況に応じた最適な解決策</strong>を提案</li>
-                <li>⚡ <strong>コマンドの自動実行</strong>で時間短縮</li>
-                <li>🛡️ <strong>安全性チェック</strong>付きで実行</li>
-                <li>📚 <strong>学習機能</strong>で同じ問題の再発防止</li>
-            </ul>
+        <div class="comparison-section">
+            <h3 style="text-align: center; color: #495057; margin-bottom: 20px;">🔍 解決方法の比較</h3>
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+                <div style="text-align: center;">
+                    <h4 style="color: #0366d6; margin-bottom: 15px;">⚙️ 手動解決</h4>
+                    <ul style="text-align: left; background: #f0f7ff; padding: 15px; border-radius: 8px; margin: 0;">
+                        <li>✅ Gitコマンドを学習できる</li>
+                        <li>✅ 完全にコントロール可能</li>
+                        <li>❌ 時間がかかる</li>
+                        <li>❌ コマンドを覚える必要</li>
+                    </ul>
+                </div>
+                <div style="text-align: center;">
+                    <h4 style="color: #7c3aed; margin-bottom: 15px;">🤖 Claude Code</h4>
+                    <ul style="text-align: left; background: #faf5ff; padding: 15px; border-radius: 8px; margin: 0;">
+                        <li>✅ 高速で自動化</li>
+                        <li>✅ 初心者にも優しい</li>
+                        <li>✅ エラー対応も自動</li>
+                        <li>❌ Claude Codeが必要</li>
+                    </ul>
+                </div>
+            </div>
         </div>
 
         <h2>🎯 最終確認</h2>
